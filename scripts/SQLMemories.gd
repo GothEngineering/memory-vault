@@ -20,6 +20,7 @@ func _on_create_data_pressed() -> void:
 	var data = {
 		"title" : title_text.text,
 		"description" : desc_text.text,
+		"data_saved" : Time.get_date_string_from_system()
 	}
 
 	database.insert_row("memories", data)
@@ -35,8 +36,10 @@ func _on_update_data_pressed() -> void:
 
 
 func _on_delete_data_pressed() -> void:
-	pass
+	database.delete_rows("memories", "title = '" + title_text.text + "'")
+	
 
 
 func _on_custom_select_pressed() -> void:
-	pass 
+	pass # Add functionality to this button, i didn't understood what the fuck it does
+	# Can't a search bar do the same and better?
