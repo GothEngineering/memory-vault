@@ -5,6 +5,7 @@ extends Control
 @onready var game_title_input: TextEdit = $Panel/GameTitleInput
 @onready var location_input: TextEdit = $Panel/LocationInput
 @onready var feeling_input: TextEdit = $Panel/FeelingInput
+@onready var id_input: TextEdit = $Panel/IDInput
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer
 
@@ -40,13 +41,15 @@ func _on_read_data_pressed() -> void:
 	# REMEMBER to add a WHERE clause otherwise this will annihilate everything if i have a bunch of rows
 
 	# Cleans up the old data so it doesn't stack onto the new data
-	for old_data in v_box_container.get_children():
-		old_data.queue_free()
+	# Maybe i should make all this loop a function so i can reuse on the other code
+	for old_row in v_box_container.get_children():
+		old_row.queue_free()
 
 	for rows in read_data:
 		var new_label = Label.new() 
-		var data_template = "%s / %s / %s / %s / %s / %s" # Template of how the data looks like
+		var data_template = "%s / %s / %s / %s / %s / %s / %s" # Template of how the data looks like
 		new_label.text = data_template % [
+			rows["id"],
 			rows["title"],
 			rows["description"],
 			rows["game_title"],
@@ -55,16 +58,21 @@ func _on_read_data_pressed() -> void:
 			rows["data_saved"],
 		]
 
-		#new_label.text = str(rows["title"]) + ": " + str(rows["description"]) # Old method, too many str()
-		# and it looks like shit because of that. I was writing it all manually like a dummy
-
 		v_box_container.add_child(new_label)
 
 func _on_update_data_pressed() -> void:
-	database.update_rows("memories", "title = '" + title_input.text + "'", {"description": str(desc_input.text)})
-	# Remember to add code to update the gametitle, location and feeling columns respectively, it isn't doing
-	# anything rn
 
+	# NEVER forget the .text after calling the textedit, ever again, PLEASE
+	var data_to_update = {
+		"title" : title_input.text,
+		"description" : desc_input.text,
+		"game_title" : game_title_input.text,
+		"location" : location_input.text,
+		"feeling" : feeling_input.text,
+		}
+	var id_inputted = "id = " + str(id_input.text)
+	database.update_rows("memories", id_inputted, data_to_update)
+	
 
 func _on_delete_data_pressed() -> void:
 	database.delete_rows("memories", "title = '" + title_input.text + "'")
