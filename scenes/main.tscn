@@ -131,6 +131,7 @@ offset_left = 410.0
 offset_top = -110.0
 offset_right = 577.0
 offset_bottom = -70.0
+placeholder_text = "TO DO: make this button not fillable with letters and also communicate that it's ONLY for searching and it's not needed to add an entry. Causes bugs if i try to add an entry with an id on the input"
 
 [node name="TitleInput" type="TextEdit" parent="Panel" unique_id=129868137]
 layout_mode = 0

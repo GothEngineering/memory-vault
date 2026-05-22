@@ -16,32 +16,17 @@ func _ready() -> void:
 	database = SQLite.new()
 	database.path = "res://memories_data.db"
 	database.open_db()
-
-
+	refresh_data_ui()
 
 func _process(delta: float) -> void:
 	pass
 
+func refresh_data_ui():
+	# This function refreshes the UI whenever i call it, but so far it's so sensitive it triggers
+	# upon pressing the button even if it doesn't make sense to do so (like pressing update without doing 
+	# any changes)
+	var read_data = database.select_rows("memories", "", ["*"])
 
-func _on_create_data_pressed() -> void:
-	var data = {
-		"title" : title_input.text,
-		"description" : desc_input.text,
-		"game_title" : game_title_input.text,
-		"location" : location_input.text,
-		"feeling" : feeling_input.text,
-		"data_saved" : Time.get_date_string_from_system(),
-	}
-
-	database.insert_row("memories", data)
-	
-
-func _on_read_data_pressed() -> void:
-	var read_data = database.select_rows("memories", "", ["*"]) # Grabs everything from all the rows,
-	# REMEMBER to add a WHERE clause otherwise this will annihilate everything if i have a bunch of rows
-
-	# Cleans up the old data so it doesn't stack onto the new data
-	# Maybe i should make all this loop a function so i can reuse on the other code
 	for old_row in v_box_container.get_children():
 		old_row.queue_free()
 
@@ -60,9 +45,34 @@ func _on_read_data_pressed() -> void:
 
 		v_box_container.add_child(new_label)
 
-func _on_update_data_pressed() -> void:
+func _on_create_data_pressed() -> void:
+	var data = {
+		"title" : title_input.text,
+		"description" : desc_input.text,
+		"game_title" : game_title_input.text,
+		"location" : location_input.text,
+		"feeling" : feeling_input.text,
+		"data_saved" : Time.get_date_string_from_system(),
+	}
 
-	# NEVER forget the .text after calling the textedit, ever again, PLEASE
+	database.insert_row("memories", data)
+	refresh_data_ui()
+
+func _on_read_data_pressed() -> void:
+	# TO DO: make it so that if it does detect a valid id; it just shows that specific row.
+	# I suppose i could copy the for loops i made for the function.
+	# Right now it's not working
+	var input_received = id_input.text
+
+	if input_received == "":
+		database.select_rows("memories", "", ["*"])
+	else:
+		var id_inputted = str(id_input.text)
+		database.select_rows("memories", "id = " + id_inputted, ["*"])
+	
+
+func _on_update_data_pressed() -> void:
+	# NEVER forget the .text after calling the textedit, PLEASE
 	var data_to_update = {
 		"title" : title_input.text,
 		"description" : desc_input.text,
@@ -71,14 +81,17 @@ func _on_update_data_pressed() -> void:
 		"feeling" : feeling_input.text,
 		}
 	var id_inputted = "id = " + str(id_input.text)
-	database.update_rows("memories", id_inputted, data_to_update)
-	
+	database.update_rows("memories", id_inputted, data_to_update) # What is "SQL error: near ";": syntax error"
+	# it occurs when i try to update without an id inside (i mean it makes sense i suppose)
+	refresh_data_ui()
 
 func _on_delete_data_pressed() -> void:
+	# Remember to change the delete function so it deletes by ID and not by title; because if two
+	# titles are the same it just completely eviscerates all of them at once, oops
 	database.delete_rows("memories", "title = '" + title_input.text + "'")
 	
+	refresh_data_ui()
 
 
 func _on_custom_select_pressed() -> void:
-	pass # Add functionality to this button, i didn't understood what the fuck it does
-	# Can't a search bar do the same and better?
+	pass # Still pretty useless 
