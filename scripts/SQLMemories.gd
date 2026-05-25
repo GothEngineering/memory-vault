@@ -33,6 +33,7 @@ func refresh_data_ui():
 	for rows in read_data:
 		var new_label = Label.new() 
 		var data_template = "%s / %s / %s / %s / %s / %s / %s" # Template of how the data looks like
+		#new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
 		new_label.text = data_template % [
 			rows["id"],
 			rows["title"],
@@ -63,10 +64,31 @@ func _on_read_data_pressed() -> void:
 	# I suppose i could copy the for loops i made for the function.
 	# Right now it's not working
 	var input_received = id_input.text
+	var read_data = database.select_rows("memories", "id = " + str(id_input.text), ["*"])
 	if input_received == "":
-		print("aka no hay nada papu")
+		refresh_data_ui()
+		print("aki no hai nada asi q imprimire todo")
 	else:
+		# FUCK YESSS IT WORKSSS IM A BLOODY GENIUS
+		for old_row in v_box_container.get_children():
+			old_row.queue_free()
+
+		for row in read_data:
+			var new_label = Label.new()
+			var data_template = "%s / %s / %s / %s / %s / %s / %s"
+			new_label.text = data_template % [
+			row["id"],
+			row["title"],
+			row["description"],
+			row["game_title"],
+			row["location"],
+			row["feeling"],
+			row["data_saved"],
+			]
+			v_box_container.add_child(new_label)
+
 		print("aki si hay texto")
+
 
 
 	#if input_received == "":
