@@ -63,13 +63,19 @@ func _on_read_data_pressed() -> void:
 	# I suppose i could copy the for loops i made for the function.
 	# Right now it's not working
 	var input_received = id_input.text
-
 	if input_received == "":
-		database.select_rows("memories", "", ["*"])
+		print("aka no hay nada papu")
 	else:
-		var id_inputted = str(id_input.text)
-		database.select_rows("memories", "id = " + id_inputted, ["*"])
-	
+		print("aki si hay texto")
+
+
+	#if input_received == "":
+		#database.select_rows("memories", "", ["*"])
+	#else:
+		#var id_inputted = str(id_input.text)
+		#database.select_rows("memories", "id = " + id_inputted, ["*"])
+		#for old_row in v_box_container.get_children():
+			#old_row.queue_free()
 
 func _on_update_data_pressed() -> void:
 	# NEVER forget the .text after calling the textedit, PLEASE
@@ -81,14 +87,14 @@ func _on_update_data_pressed() -> void:
 		"feeling" : feeling_input.text,
 		}
 	var id_inputted = "id = " + str(id_input.text)
-	database.update_rows("memories", id_inputted, data_to_update) # What is "SQL error: near ";": syntax error"
+	database.update_rows("memories", id_inputted, data_to_update) 
+	# What is "SQL error: near ";": syntax error"
 	# it occurs when i try to update without an id inside (i mean it makes sense i suppose)
 	refresh_data_ui()
 
 func _on_delete_data_pressed() -> void:
-	# Remember to change the delete function so it deletes by ID and not by title; because if two
-	# titles are the same it just completely eviscerates all of them at once, oops
-	database.delete_rows("memories", "title = '" + title_input.text + "'")
+	# I think that fixed it; probably
+	database.delete_rows("memories", "id = '" + id_input.text + "'")
 	
 	refresh_data_ui()
 
