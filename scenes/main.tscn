@@ -52,6 +52,23 @@ offset_right = 1113.0
 offset_bottom = 623.0
 text = "Custom select"
 
+[node name="ShowLess" type="Button" parent="." unique_id=1553447040]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 592.0
+offset_right = 689.0
+offset_bottom = 623.0
+text = "Show Less
+"
+
+[node name="ShowMore" type="Button" parent="." unique_id=965792375]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 560.0
+offset_right = 689.0
+offset_bottom = 591.0
+text = "Show More"
+
 [node name="Panel" type="Control" parent="." unique_id=1733254937]
 anchors_preset = 0
 offset_left = 531.0
@@ -181,15 +198,16 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
 [node name="ToDoList" type="Label" parent="." unique_id=1560100599]
-visible = false
 layout_mode = 0
 offset_right = 602.0
 offset_bottom = 147.0
-text = "make the vboxcontainer autowrap so it doesn't extend for too long (the thing is showing the desc, not making it on one line"
-autowrap_mode = 1
+text = "Add a new button for specific name searching; although that sounds kind of shitty honestly but oh well i'll figure it out later"
+autowrap_mode = 2
 
 [connection signal="pressed" from="CreateData" to="." method="_on_create_data_pressed"]
 [connection signal="pressed" from="ReadData" to="." method="_on_read_data_pressed"]
 [connection signal="pressed" from="UpdateData" to="." method="_on_update_data_pressed"]
 [connection signal="pressed" from="DeleteData" to="." method="_on_delete_data_pressed"]
 [connection signal="pressed" from="CustomSelect" to="." method="_on_custom_select_pressed"]
+[connection signal="pressed" from="ShowLess" to="." method="_on_show_less_pressed"]
+[connection signal="pressed" from="ShowMore" to="." method="_on_show_more_pressed"]

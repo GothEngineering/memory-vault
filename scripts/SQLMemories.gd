@@ -11,6 +11,8 @@ extends Control
 
 
 var database : SQLite
+var current_offset = 0
+var current_limit = 20
 
 func _ready() -> void:
 	database = SQLite.new()
@@ -25,14 +27,17 @@ func refresh_data_ui():
 	# This function refreshes the UI whenever i call it, but so far it's so sensitive it triggers
 	# upon pressing the button even if it doesn't make sense to do so (like pressing update without doing 
 	# any changes)
-	var read_data = database.select_rows("memories", "", ["*"])
+	var query_limit = "SELECT * FROM memories LIMIT %d OFFSET %d;" % [current_limit, current_offset]
+	database.query(query_limit)
+	var read_result = database.query_result
+	#var read_data = database.select_rows("memories", "", ["*"])
 
 	# This loop deletes the old labels
 	for old_row in v_box_container.get_children():
 		old_row.queue_free()
 
 	# This loop creates all the new labels
-	for rows in read_data:
+	for rows in read_result:
 		var new_label = Label.new() 
 		var data_template = "%s / %s / %s / %s / %s / %s / %s" # Template of how the data looks like
 		new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
@@ -73,8 +78,10 @@ func _on_read_data_pressed() -> void:
 		for old_row in v_box_container.get_children():
 			old_row.queue_free()
 
+		# Make it so it starts from newest to oldest. To do later: leave future me the task of
+		# finding a quicker way to sort through all the entries without typing random numbers or
+		# scrolling for ages
 		for row in read_data:
-
 			var new_label = Label.new()
 			var data_template = "%s / %s / %s / %s / %s / %s / %s"
 			new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
@@ -114,4 +121,15 @@ func _on_delete_data_pressed() -> void:
 
 
 func _on_custom_select_pressed() -> void:
-	pass # Still pretty useless 
+	pass # What am i gonna do with you?
+
+
+func _on_show_less_pressed() -> void:
+	current_limit -= 20
+	if current_limit < 20:
+		current_limit = 20
+	refresh_data_ui()
+
+func _on_show_more_pressed() -> void:
+	current_limit += 20
+	refresh_data_ui()
