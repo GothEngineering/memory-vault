@@ -173,11 +173,15 @@ layout_mode = 0
 offset_top = 357.0
 offset_right = 594.0
 offset_bottom = 623.0
+horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1699166205]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
 
 [node name="ToDoList" type="Label" parent="." unique_id=1560100599]
+visible = false
 layout_mode = 0
 offset_right = 602.0
 offset_bottom = 147.0

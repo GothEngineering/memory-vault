@@ -7,7 +7,7 @@ extends Control
 @onready var feeling_input: TextEdit = $Panel/FeelingInput
 @onready var id_input: TextEdit = $Panel/IDInput
 @onready var scroll_container: ScrollContainer = $ScrollContainer
-@onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer
+@onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer # I gotta change this name
 
 
 var database : SQLite
@@ -27,13 +27,16 @@ func refresh_data_ui():
 	# any changes)
 	var read_data = database.select_rows("memories", "", ["*"])
 
+	# This loop deletes the old labels
 	for old_row in v_box_container.get_children():
 		old_row.queue_free()
 
+	# This loop creates all the new labels
 	for rows in read_data:
 		var new_label = Label.new() 
 		var data_template = "%s / %s / %s / %s / %s / %s / %s" # Template of how the data looks like
-		#new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
+		new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
+		new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		new_label.text = data_template % [
 			rows["id"],
 			rows["title"],
@@ -60,22 +63,22 @@ func _on_create_data_pressed() -> void:
 	refresh_data_ui()
 
 func _on_read_data_pressed() -> void:
-	# TO DO: make it so that if it does detect a valid id; it just shows that specific row.
-	# I suppose i could copy the for loops i made for the function.
-	# Right now it's not working
+
 	var input_received = id_input.text
 	var read_data = database.select_rows("memories", "id = " + str(id_input.text), ["*"])
 	if input_received == "":
 		refresh_data_ui()
 		print("aki no hai nada asi q imprimire todo")
 	else:
-		# FUCK YESSS IT WORKSSS IM A BLOODY GENIUS
 		for old_row in v_box_container.get_children():
 			old_row.queue_free()
 
 		for row in read_data:
+
 			var new_label = Label.new()
 			var data_template = "%s / %s / %s / %s / %s / %s / %s"
+			new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
+			new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			new_label.text = data_template % [
 			row["id"],
 			row["title"],
@@ -88,16 +91,6 @@ func _on_read_data_pressed() -> void:
 			v_box_container.add_child(new_label)
 
 		print("aki si hay texto")
-
-
-
-	#if input_received == "":
-		#database.select_rows("memories", "", ["*"])
-	#else:
-		#var id_inputted = str(id_input.text)
-		#database.select_rows("memories", "id = " + id_inputted, ["*"])
-		#for old_row in v_box_container.get_children():
-			#old_row.queue_free()
 
 func _on_update_data_pressed() -> void:
 	# NEVER forget the .text after calling the textedit, PLEASE
@@ -117,7 +110,6 @@ func _on_update_data_pressed() -> void:
 func _on_delete_data_pressed() -> void:
 	# I think that fixed it; probably
 	database.delete_rows("memories", "id = '" + id_input.text + "'")
-	
 	refresh_data_ui()
 
 
