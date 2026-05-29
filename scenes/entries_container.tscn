@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://wwt2wwxmbo6g"]
+
+[ext_resource type="Script" uid="uid://bcilm63k2kycc" path="res://scripts/entries_container.gd" id="1_7s40s"]
+
+[node name="EntriesContainer" type="PanelContainer" unique_id=1027961223]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7s40s")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=310150678]
+layout_mode = 2
+focus_mode = 2
+bbcode_enabled = true
+selection_enabled = true

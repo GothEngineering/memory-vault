@@ -25,10 +25,9 @@ func _process(delta: float) -> void:
 	pass
 
 func refresh_data_ui():
-	# This function refreshes the UI whenever i call it, but so far it's so sensitive it triggers
-	# upon pressing the button even if it doesn't make sense to do so (like pressing update without doing 
-	# any changes)
-	if sort_by_oldest == false:
+	# This function refreshes the UI whenever i call it
+	# Refactor this true/false toggle later, it's real bad but funny
+	if sort_by_oldest == false: 
 		var query_limit = "SELECT * FROM memories ORDER BY id DESC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
 		database.query(query_limit)
 	else:
@@ -44,7 +43,7 @@ func refresh_data_ui():
 	# This loop creates all the new labels
 	for rows in read_result:
 		var new_label = Label.new() 
-		var data_template = "%s / %s / %s / %s / %s / %s / %s" # Template of how the data looks like
+		var data_template = "%s | %s | %s | %s | %s | %s | %s" # Template of how the data looks like
 		new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
 		new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		new_label.text = data_template % [
@@ -75,7 +74,10 @@ func _on_create_data_pressed() -> void:
 func _on_read_data_pressed() -> void:
 
 	var input_received = id_input.text
+	#var title_received = title_input
 	var read_data = database.select_rows("memories", "id = " + str(id_input.text), ["*"])
+
+	# Find a way to search for title if the id isn't full, maybe i have to re-do this part
 	if input_received == "":
 		refresh_data_ui()
 		print("aki no hai nada asi q imprimire todo")
@@ -83,12 +85,10 @@ func _on_read_data_pressed() -> void:
 		for old_row in v_box_container.get_children():
 			old_row.queue_free()
 
-		# Make it so it starts from newest to oldest. To do later: leave future me the task of
-		# finding a quicker way to sort through all the entries without typing random numbers or
-		# scrolling for ages
+
 		for row in read_data:
 			var new_label = Label.new()
-			var data_template = "%s / %s / %s / %s / %s / %s / %s"
+			var data_template = "%s | %s | %s | %s | %s | %s | %s"
 			new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
 			new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			new_label.text = data_template % [
@@ -128,15 +128,19 @@ func _on_delete_data_pressed() -> void:
 func _on_custom_select_pressed() -> void:
 	pass # What am i gonna do with you?
 
-
+	# TO-DO: change the current_offset so it hides the last 20 entries to avoid lag
 func _on_show_less_pressed() -> void:
 	current_limit -= 20
+	#current_offset -= 20
 	if current_limit < 20:
 		current_limit = 20
+	#if current_offset < 0:
+		#current_offset = 0
 	refresh_data_ui()
 
 func _on_show_more_pressed() -> void:
 	current_limit += 20
+	#current_offset += 20
 	refresh_data_ui()
 
 func _on_sort_by_pressed() -> void:

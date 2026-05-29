@@ -72,9 +72,9 @@ text = "Show More"
 [node name="SortBy" type="Button" parent="." unique_id=1705957274]
 layout_mode = 0
 offset_left = 594.0
-offset_top = 507.0
+offset_top = 357.0
 offset_right = 689.0
-offset_bottom = 538.0
+offset_bottom = 388.0
 text = "Sort By"
 
 [node name="Panel" type="Control" parent="." unique_id=1733254937]
@@ -152,9 +152,9 @@ vertical_alignment = 1
 
 [node name="IDInput" type="TextEdit" parent="Panel" unique_id=2119631437]
 layout_mode = 0
-offset_left = 410.0
+offset_left = 450.0
 offset_top = -110.0
-offset_right = 577.0
+offset_right = 534.0
 offset_bottom = -70.0
 placeholder_text = "TO DO: make this button not fillable with letters and also communicate that it's ONLY for searching and it's not needed to add an entry. Causes bugs if i try to add an entry with an id on the input"
 
@@ -209,7 +209,9 @@ theme_override_constants/separation = 20
 layout_mode = 0
 offset_right = 602.0
 offset_bottom = 147.0
-text = "Add a new button for specific name searching; although that sounds kind of shitty honestly but oh well i'll figure it out later"
+text = "Add a new button for specific name searching; although that sounds kind of shitty honestly but oh well i'll figure it out later
+
+also change the text label to a richtextlabel, it's much better to make it look pretty; and then brainstorm ideas for the UI interface (idk what to do LMAO)"
 autowrap_mode = 2
 
 [connection signal="pressed" from="CreateData" to="." method="_on_create_data_pressed"]
