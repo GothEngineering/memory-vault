@@ -13,6 +13,7 @@ extends Control
 var database : SQLite
 var current_offset = 0
 var current_limit = 20
+var sort_by_oldest = false
 
 func _ready() -> void:
 	database = SQLite.new()
@@ -27,8 +28,12 @@ func refresh_data_ui():
 	# This function refreshes the UI whenever i call it, but so far it's so sensitive it triggers
 	# upon pressing the button even if it doesn't make sense to do so (like pressing update without doing 
 	# any changes)
-	var query_limit = "SELECT * FROM memories LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-	database.query(query_limit)
+	if sort_by_oldest == false:
+		var query_limit = "SELECT * FROM memories ORDER BY id DESC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
+		database.query(query_limit)
+	else:
+		var query_limit = "SELECT * FROM memories ORDER BY id ASC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
+		database.query(query_limit)
 	var read_result = database.query_result
 	#var read_data = database.select_rows("memories", "", ["*"])
 
@@ -133,3 +138,8 @@ func _on_show_less_pressed() -> void:
 func _on_show_more_pressed() -> void:
 	current_limit += 20
 	refresh_data_ui()
+
+func _on_sort_by_pressed() -> void:
+	sort_by_oldest = !sort_by_oldest
+	refresh_data_ui()
+	print("Switched order")

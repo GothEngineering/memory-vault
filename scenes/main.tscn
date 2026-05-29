@@ -69,6 +69,14 @@ offset_right = 689.0
 offset_bottom = 591.0
 text = "Show More"
 
+[node name="SortBy" type="Button" parent="." unique_id=1705957274]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 507.0
+offset_right = 689.0
+offset_bottom = 538.0
+text = "Sort By"
+
 [node name="Panel" type="Control" parent="." unique_id=1733254937]
 anchors_preset = 0
 offset_left = 531.0
@@ -211,3 +219,4 @@ autowrap_mode = 2
 [connection signal="pressed" from="CustomSelect" to="." method="_on_custom_select_pressed"]
 [connection signal="pressed" from="ShowLess" to="." method="_on_show_less_pressed"]
 [connection signal="pressed" from="ShowMore" to="." method="_on_show_more_pressed"]
+[connection signal="pressed" from="SortBy" to="." method="_on_sort_by_pressed"]
