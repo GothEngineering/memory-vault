@@ -58,16 +58,15 @@ offset_left = 594.0
 offset_top = 592.0
 offset_right = 689.0
 offset_bottom = 623.0
-text = "Show Less
-"
+text = "Previous Page"
 
 [node name="ShowMore" type="Button" parent="." unique_id=965792375]
 layout_mode = 0
 offset_left = 594.0
 offset_top = 560.0
-offset_right = 689.0
+offset_right = 711.0
 offset_bottom = 591.0
-text = "Show More"
+text = "Next Page"
 
 [node name="SortBy" type="Button" parent="." unique_id=1705957274]
 layout_mode = 0

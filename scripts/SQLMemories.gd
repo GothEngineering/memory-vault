@@ -24,6 +24,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func delete_old_labels():
+	for old_row in v_box_container.get_children():
+		old_row.queue_free()
+
 func refresh_data_ui():
 	# This function refreshes the UI whenever i call it
 	# Refactor this true/false toggle later, it's real bad but funny
@@ -34,7 +38,6 @@ func refresh_data_ui():
 		var query_limit = "SELECT * FROM memories ORDER BY id ASC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
 		database.query(query_limit)
 	var read_result = database.query_result
-	#var read_data = database.select_rows("memories", "", ["*"])
 
 	# This loop deletes the old labels
 	for old_row in v_box_container.get_children():
@@ -82,9 +85,7 @@ func _on_read_data_pressed() -> void:
 		refresh_data_ui()
 		print("aki no hai nada asi q imprimire todo")
 	else:
-		for old_row in v_box_container.get_children():
-			old_row.queue_free()
-
+		delete_old_labels()
 
 		for row in read_data:
 			var new_label = Label.new()
@@ -130,17 +131,17 @@ func _on_custom_select_pressed() -> void:
 
 	# TO-DO: change the current_offset so it hides the last 20 entries to avoid lag
 func _on_show_less_pressed() -> void:
-	current_limit -= 20
-	#current_offset -= 20
-	if current_limit < 20:
-		current_limit = 20
-	#if current_offset < 0:
-		#current_offset = 0
+	#current_limit -= 20
+	current_offset -= 20
+	#if current_limit < 20:
+		#current_limit = 20
+	if current_offset < 0:
+		current_offset = 0
 	refresh_data_ui()
 
 func _on_show_more_pressed() -> void:
-	current_limit += 20
-	#current_offset += 20
+	#current_limit += 20
+	current_offset += 20
 	refresh_data_ui()
 
 func _on_sort_by_pressed() -> void:
