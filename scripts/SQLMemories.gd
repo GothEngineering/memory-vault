@@ -9,6 +9,7 @@ extends Control
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer # I gotta change this name
 
+const ENTRIESCONTAINER = preload("res://scenes/entries_container.tscn")
 
 var database : SQLite
 var current_offset = 0
@@ -45,11 +46,9 @@ func refresh_data_ui():
 
 	# This loop creates all the new labels
 	for rows in read_result:
-		var new_label = Label.new() 
-		var data_template = "%s | %s | %s | %s | %s | %s | %s" # Template of how the data looks like
-		new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
-		new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		new_label.text = data_template % [
+		var new_label = ENTRIESCONTAINER.instantiate()
+		var template = "%s | %s | %s | %s | %s | %s | %s"
+		var data_on_template = template % [
 			rows["id"],
 			rows["title"],
 			rows["description"],
@@ -60,6 +59,8 @@ func refresh_data_ui():
 		]
 
 		v_box_container.add_child(new_label)
+		new_label.set_rows_text(data_on_template)
+
 
 func _on_create_data_pressed() -> void:
 	var data = {
@@ -77,7 +78,6 @@ func _on_create_data_pressed() -> void:
 func _on_read_data_pressed() -> void:
 
 	var input_received = id_input.text
-	#var title_received = title_input
 	var read_data = database.select_rows("memories", "id = " + str(id_input.text), ["*"])
 
 	# Find a way to search for title if the id isn't full, maybe i have to re-do this part
@@ -106,6 +106,7 @@ func _on_read_data_pressed() -> void:
 		print("aki si hay texto")
 
 func _on_update_data_pressed() -> void:
+
 	# NEVER forget the .text after calling the textedit, PLEASE
 	var data_to_update = {
 		"title" : title_input.text,
@@ -121,7 +122,7 @@ func _on_update_data_pressed() -> void:
 	refresh_data_ui()
 
 func _on_delete_data_pressed() -> void:
-	# I think that fixed it; probably
+
 	database.delete_rows("memories", "id = '" + id_input.text + "'")
 	refresh_data_ui()
 
@@ -131,16 +132,12 @@ func _on_custom_select_pressed() -> void:
 
 	# TO-DO: change the current_offset so it hides the last 20 entries to avoid lag
 func _on_show_less_pressed() -> void:
-	#current_limit -= 20
 	current_offset -= 20
-	#if current_limit < 20:
-		#current_limit = 20
 	if current_offset < 0:
 		current_offset = 0
 	refresh_data_ui()
 
 func _on_show_more_pressed() -> void:
-	#current_limit += 20
 	current_offset += 20
 	refresh_data_ui()
 
