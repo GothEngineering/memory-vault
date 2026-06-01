@@ -12,6 +12,7 @@ script = ExtResource("1_7s40s")
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
-text = "TO DO: add double click functionality to expand the text and leave just three rows (title, desc and id), something about _gui_input as i saw on google"
 fit_content = true
 selection_enabled = true
+
+[connection signal="gui_input" from="RichTextLabel" to="." method="_on_rich_text_label_gui_input"]

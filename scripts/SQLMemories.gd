@@ -47,15 +47,15 @@ func refresh_data_ui():
 	# This loop creates all the new labels
 	for rows in read_result:
 		var new_label = ENTRIESCONTAINER.instantiate()
-		var template = "%s | %s | %s | %s | %s | %s | %s"
+		var template = "%s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
 			rows["title"],
 			rows["description"],
-			rows["game_title"],
-			rows["location"],
-			rows["feeling"],
-			rows["data_saved"],
+			#rows["game_title"],
+			#rows["location"],
+			#rows["feeling"],
+			#rows["data_saved"],
 		]
 
 		v_box_container.add_child(new_label)
@@ -87,21 +87,21 @@ func _on_read_data_pressed() -> void:
 	else:
 		delete_old_labels()
 
-		for row in read_data:
-			var new_label = Label.new()
-			var data_template = "%s | %s | %s | %s | %s | %s | %s"
-			new_label.autowrap_mode = TextServer.AUTOWRAP_WORD 
-			new_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			new_label.text = data_template % [
-			row["id"],
-			row["title"],
-			row["description"],
-			row["game_title"],
-			row["location"],
-			row["feeling"],
-			row["data_saved"],
-			]
-			v_box_container.add_child(new_label)
+	for rows in read_data:
+		var new_label = ENTRIESCONTAINER.instantiate()
+		var template = "%s | %s | %s | %s | %s | %s | %s"
+		var data_on_template = template % [
+			rows["id"],
+			rows["title"],
+			rows["description"],
+			rows["game_title"],
+			rows["location"],
+			rows["feeling"],
+			rows["data_saved"],
+		]
+
+		v_box_container.add_child(new_label)
+		new_label.set_rows_text(data_on_template)
 
 		print("aki si hay texto")
 
@@ -128,7 +128,7 @@ func _on_delete_data_pressed() -> void:
 
 
 func _on_custom_select_pressed() -> void:
-	pass # What am i gonna do with you?
+	pass 
 
 	# TO-DO: change the current_offset so it hides the last 20 entries to avoid lag
 func _on_show_less_pressed() -> void:
