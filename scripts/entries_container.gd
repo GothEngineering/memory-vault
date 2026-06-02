@@ -17,5 +17,4 @@ func _on_rich_text_label_gui_input(event: InputEvent) -> void:
 	var selection = "id = " + str(entry_id)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
-			#database.select_rows("memories", selection, ["*"])
-			pass
+			DatabaseGlobal.database.select_rows("memories", selection, ["*"])

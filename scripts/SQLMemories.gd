@@ -11,16 +11,15 @@ extends Control
 
 const ENTRIESCONTAINER = preload("res://scenes/entries_container.tscn")
 
-var database : SQLite
-#var entry_id : int
+#var database : SQLite
 var current_offset = 0
 var current_limit = 20
 var sort_by_oldest = false
 
 func _ready() -> void:
-	database = SQLite.new()
-	database.path = "res://memories_data.db"
-	database.open_db()
+	#database = SQLite.new()
+	#database.path = "res://memories_data.db"
+	#database.open_db()
 	refresh_data_ui()
 
 func _process(delta: float) -> void:
@@ -35,11 +34,11 @@ func refresh_data_ui():
 	# Refactor this true/false toggle later, it's real bad but funny
 	if sort_by_oldest == false: 
 		var query_limit = "SELECT * FROM memories ORDER BY id DESC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-		database.query(query_limit)
+		DatabaseGlobal.database.query(query_limit)
 	else:
 		var query_limit = "SELECT * FROM memories ORDER BY id ASC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-		database.query(query_limit)
-	var read_result = database.query_result
+		DatabaseGlobal.database.query(query_limit)
+	var read_result = DatabaseGlobal.database.query_result
 
 	# This loop deletes the old labels
 	for old_row in v_box_container.get_children():
@@ -74,13 +73,13 @@ func _on_create_data_pressed() -> void:
 		"data_saved" : Time.get_date_string_from_system(),
 	}
 
-	database.insert_row("memories", data)
+	DatabaseGlobal.database.insert_row("memories", data)
 	refresh_data_ui()
 
 func _on_read_data_pressed() -> void:
 
 	var input_received = id_input.text
-	var read_data = database.select_rows("memories", "id = " + str(id_input.text), ["*"])
+	var read_data = DatabaseGlobal.database.select_rows("memories", "id = " + str(id_input.text), ["*"])
 
 	# Find a way to search for title if the id isn't full, maybe i have to re-do this part
 	if input_received == "":
@@ -118,14 +117,14 @@ func _on_update_data_pressed() -> void:
 		"feeling" : feeling_input.text,
 		}
 	var id_inputted = "id = " + str(id_input.text)
-	database.update_rows("memories", id_inputted, data_to_update) 
+	DatabaseGlobal.database.update_rows("memories", id_inputted, data_to_update) 
 	# What is "SQL error: near ";": syntax error"
 	# it occurs when i try to update without an id inside (i mean it makes sense i suppose)
 	refresh_data_ui()
 
 func _on_delete_data_pressed() -> void:
 
-	database.delete_rows("memories", "id = '" + id_input.text + "'")
+	DatabaseGlobal.database.delete_rows("memories", "id = '" + id_input.text + "'")
 	refresh_data_ui()
 
 
