@@ -12,6 +12,7 @@ extends Control
 const ENTRIESCONTAINER = preload("res://scenes/entries_container.tscn")
 
 var database : SQLite
+#var entry_id : int
 var current_offset = 0
 var current_limit = 20
 var sort_by_oldest = false
@@ -47,6 +48,7 @@ func refresh_data_ui():
 	# This loop creates all the new labels
 	for rows in read_result:
 		var new_label = ENTRIESCONTAINER.instantiate()
+		new_label.entry_id = rows["id"]
 		var template = "%s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
