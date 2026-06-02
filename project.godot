@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-DatabaseGlobal="*uid://bmdar6a1lw7r6"
+DB_global="*uid://bmdar6a1lw7r6"
 
 [physics]
 

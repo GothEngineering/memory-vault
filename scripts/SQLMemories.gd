@@ -34,11 +34,11 @@ func refresh_data_ui():
 	# Refactor this true/false toggle later, it's real bad but funny
 	if sort_by_oldest == false: 
 		var query_limit = "SELECT * FROM memories ORDER BY id DESC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-		DatabaseGlobal.database.query(query_limit)
+		DB_global.database.query(query_limit)
 	else:
 		var query_limit = "SELECT * FROM memories ORDER BY id ASC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-		DatabaseGlobal.database.query(query_limit)
-	var read_result = DatabaseGlobal.database.query_result
+		DB_global.database.query(query_limit)
+	var read_result = DB_global.database.query_result
 
 	# This loop deletes the old labels
 	for old_row in v_box_container.get_children():
@@ -48,6 +48,7 @@ func refresh_data_ui():
 	for rows in read_result:
 		var new_label = ENTRIESCONTAINER.instantiate()
 		new_label.entry_id = rows["id"]
+		# Probably i will need to place the new_label emitted signal here
 		var template = "%s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
@@ -73,13 +74,13 @@ func _on_create_data_pressed() -> void:
 		"data_saved" : Time.get_date_string_from_system(),
 	}
 
-	DatabaseGlobal.database.insert_row("memories", data)
+	DB_global.database.insert_row("memories", data)
 	refresh_data_ui()
 
 func _on_read_data_pressed() -> void:
 
 	var input_received = id_input.text
-	var read_data = DatabaseGlobal.database.select_rows("memories", "id = " + str(id_input.text), ["*"])
+	var read_data = DB_global.database.select_rows("memories", "id = " + str(id_input.text), ["*"])
 
 	# Find a way to search for title if the id isn't full, maybe i have to re-do this part
 	if input_received == "":
@@ -117,14 +118,14 @@ func _on_update_data_pressed() -> void:
 		"feeling" : feeling_input.text,
 		}
 	var id_inputted = "id = " + str(id_input.text)
-	DatabaseGlobal.database.update_rows("memories", id_inputted, data_to_update) 
+	DB_global.database.update_rows("memories", id_inputted, data_to_update) 
 	# What is "SQL error: near ";": syntax error"
 	# it occurs when i try to update without an id inside (i mean it makes sense i suppose)
 	refresh_data_ui()
 
 func _on_delete_data_pressed() -> void:
 
-	DatabaseGlobal.database.delete_rows("memories", "id = '" + id_input.text + "'")
+	DB_global.database.delete_rows("memories", "id = '" + id_input.text + "'")
 	refresh_data_ui()
 
 
