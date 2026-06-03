@@ -16,7 +16,7 @@ const ENTRIESCONTAINER = preload("res://scenes/entries_container.tscn")
 var current_offset = 0
 var current_limit = 20
 var sort_by_oldest = false
-
+var sorting_by = "DESC"
 
 func _ready() -> void:
 	refresh_data_ui()
@@ -31,13 +31,9 @@ func delete_old_labels():
 func refresh_data_ui():
 
 	# This function refreshes the UI whenever i call it
-	# Refactor this true/false toggle later, it's real bad but funny
-	if sort_by_oldest == false: 
-		var query_limit = "SELECT * FROM memories ORDER BY id DESC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-		DB_global.database.query(query_limit)
-	else:
-		var query_limit = "SELECT * FROM memories ORDER BY id ASC LIMIT %d OFFSET %d;" % [current_limit, current_offset]
-		DB_global.database.query(query_limit)
+	var query_limit = "SELECT * FROM memories ORDER BY id %s LIMIT %d OFFSET %d;" % [sorting_by, current_limit, current_offset]
+	DB_global.database.query(query_limit)
+
 	var read_result = DB_global.database.query_result
 
 	# This loop deletes the old labels
@@ -103,6 +99,7 @@ func _on_read_data_pressed() -> void:
 	if input_received == "":
 		refresh_data_ui()
 		print("aki no hai nada asi q imprimire todo")
+
 	else:
 		delete_old_labels()
 
@@ -160,5 +157,9 @@ func _on_show_more_pressed() -> void:
 
 func _on_sort_by_pressed() -> void:
 	sort_by_oldest = !sort_by_oldest
+	if sort_by_oldest == true:
+		sorting_by = "ASC"
+	else:
+		sorting_by = "DESC"
 	refresh_data_ui()
 	print("Switched order")
