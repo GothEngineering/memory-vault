@@ -9,17 +9,16 @@ extends Control
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var v_box_container: VBoxContainer = $ScrollContainer/VBoxContainer # I gotta change this name
 
+
 const ENTRIESCONTAINER = preload("res://scenes/entries_container.tscn")
 
-#var database : SQLite
+
 var current_offset = 0
 var current_limit = 20
 var sort_by_oldest = false
 
+
 func _ready() -> void:
-	#database = SQLite.new()
-	#database.path = "res://memories_data.db"
-	#database.open_db()
 	refresh_data_ui()
 
 func _process(delta: float) -> void:
@@ -55,10 +54,6 @@ func refresh_data_ui():
 			rows["id"],
 			rows["title"],
 			rows["description"],
-			#rows["game_title"],
-			#rows["location"],
-			#rows["feeling"],
-			#rows["data_saved"],
 		]
 
 		v_box_container.add_child(new_label)
@@ -128,7 +123,6 @@ func _on_read_data_pressed() -> void:
 		v_box_container.add_child(new_label)
 		new_label.set_rows_text(data_on_template)
 
-		print("aki si hay texto")
 
 func _on_update_data_pressed() -> void:
 
@@ -142,8 +136,6 @@ func _on_update_data_pressed() -> void:
 		}
 	var id_inputted = "id = " + str(id_input.text)
 	DB_global.database.update_rows("memories", id_inputted, data_to_update) 
-	# What is "SQL error: near ";": syntax error"
-	# it occurs when i try to update without an id inside (i mean it makes sense i suppose)
 	refresh_data_ui()
 
 func _on_delete_data_pressed() -> void:
@@ -155,7 +147,7 @@ func _on_delete_data_pressed() -> void:
 func _on_custom_select_pressed() -> void:
 	pass 
 
-	# TO-DO: change the current_offset so it hides the last 20 entries to avoid lag
+
 func _on_show_less_pressed() -> void:
 	current_offset -= 20
 	if current_offset < 0:
