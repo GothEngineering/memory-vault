@@ -65,8 +65,26 @@ func refresh_data_ui():
 		new_label.set_rows_text(data_on_template)
 
 func _clicked_entry_signal(selection):
-	print("oli doble click")
-	DB_global.database.select_rows("memories", selection, ["*"])
+	print("oli doble click, mi data es :" + selection)
+	var show_selected = DB_global.database.select_rows("memories", "id =" + selection, ["*"])
+	delete_old_labels()
+
+	for rows in show_selected:
+		var new_label = ENTRIESCONTAINER.instantiate()
+		new_label.entry_id = rows["id"]
+		var template = "%s | %s | %s | %s | %s | %s | %s"
+		var data_on_template = template % [
+			rows["id"],
+			rows["title"],
+			rows["description"],
+			rows["game_title"],
+			rows["location"],
+			rows["feeling"],
+			rows["data_saved"],
+		]
+
+		v_box_container.add_child(new_label)
+		new_label.set_rows_text(data_on_template)
 
 func _on_create_data_pressed() -> void:
 	var data = {
@@ -95,6 +113,7 @@ func _on_read_data_pressed() -> void:
 
 	for rows in read_data:
 		var new_label = ENTRIESCONTAINER.instantiate()
+		new_label.entry_id = rows["id"]
 		var template = "%s | %s | %s | %s | %s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
