@@ -30,6 +30,7 @@ func delete_old_labels():
 		old_row.queue_free()
 
 func refresh_data_ui():
+
 	# This function refreshes the UI whenever i call it
 	# Refactor this true/false toggle later, it's real bad but funny
 	if sort_by_oldest == false: 
@@ -48,7 +49,7 @@ func refresh_data_ui():
 	for rows in read_result:
 		var new_label = ENTRIESCONTAINER.instantiate()
 		new_label.entry_id = rows["id"]
-		# Probably i will need to place the new_label emitted signal here
+		new_label.double_clicked_entry.connect(_clicked_entry_signal)
 		var template = "%s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
@@ -63,6 +64,9 @@ func refresh_data_ui():
 		v_box_container.add_child(new_label)
 		new_label.set_rows_text(data_on_template)
 
+func _clicked_entry_signal(selection):
+	print("oli doble click")
+	DB_global.database.select_rows("memories", selection, ["*"])
 
 func _on_create_data_pressed() -> void:
 	var data = {
