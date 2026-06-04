@@ -18,18 +18,20 @@ var current_limit = 20
 var sort_by_oldest = false
 var sorting_by = "DESC"
 
+
 func _ready() -> void:
 	refresh_data_ui()
 
 func _process(delta: float) -> void:
 	pass
 
-func delete_old_labels():
-	for old_row in v_box_container.get_children():
-		old_row.queue_free()
+func loop_data():
+	pass
 
 func refresh_data_ui():
-
+	# Maybe a true or false boolean? think about it: if true, show all rows, if false just show the
+	# specific row or something, and in each one i change the variable slightly... Or just use
+	# an enum. IDK that's for later im thinking right now
 	# This function refreshes the UI whenever i call it
 	var query_limit = "SELECT * FROM memories ORDER BY id %s LIMIT %d OFFSET %d;" % [sorting_by, current_limit, current_offset]
 	DB_global.database.query(query_limit)
@@ -61,7 +63,9 @@ func _clicked_entry_signal(selection):
 
 	# Please do a function using the for loop. I dont want to repeat it 4 more times each time i call
 	# my database
-	delete_old_labels()
+	for old_row in v_box_container.get_children():
+		old_row.queue_free()
+
 
 	for rows in show_selected:
 		var new_label = ENTRIESCONTAINER.instantiate()
@@ -104,7 +108,9 @@ func _on_read_data_pressed() -> void:
 		print("aki no hai nada asi q imprimire todo")
 
 	else:
-		delete_old_labels()
+		for old_row in v_box_container.get_children():
+			old_row.queue_free()
+
 
 	for rows in read_data:
 		var new_label = ENTRIESCONTAINER.instantiate()

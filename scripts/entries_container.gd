@@ -19,4 +19,3 @@ func _on_rich_text_label_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
 			double_clicked_entry.emit(selection)
-		# TO DO: An option to refresh the data without pressing read data, maybe right mouse?
