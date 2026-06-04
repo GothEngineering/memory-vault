@@ -25,6 +25,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+#func create_tables():
+	# Remember to make a function to create the tables if the user doesn't have the .db file
+
+
 func loop_data():
 	pass
 

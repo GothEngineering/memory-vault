@@ -209,9 +209,9 @@ offset_right = 602.0
 offset_bottom = 187.0
 text = "Add a new button for specific title search instead of just IDs
 
-Change the rich label text so it has different colors for the different rows; yellow for the title and white/gray for the description. Find out what's better; if to show the title and id and then make the description expandable or make the expandable part just the small details like location and date. 
+Lean into the minecraft chatbox aesthetic too, and also make a \"page empty\" if the current_offset is higher than the amount of text that there is, that is simple right?
 
-Lean into the minecraft chatbox aesthetic too, and also make a \"page empty\" if the current_offset is higher than the amount of text that there is, that is simple right?"
+Limit the id input to just integers, and also consider if you really need 6 different rows for this"
 autowrap_mode = 2
 
 [connection signal="pressed" from="CreateData" to="." method="_on_create_data_pressed"]

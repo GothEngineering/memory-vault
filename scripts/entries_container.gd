@@ -16,6 +16,7 @@ func set_rows_text(new_text: String) -> void:
 
 func _on_rich_text_label_gui_input(event: InputEvent) -> void:
 	var selection = str(entry_id)
+	var test = "id = "
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
 			double_clicked_entry.emit(selection)
