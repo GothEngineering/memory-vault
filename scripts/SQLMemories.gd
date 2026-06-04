@@ -45,7 +45,7 @@ func refresh_data_ui():
 		var new_label = ENTRIESCONTAINER.instantiate()
 		new_label.entry_id = rows["id"]
 		new_label.double_clicked_entry.connect(_clicked_entry_signal)
-		var template = "%s | %s | %s"
+		var template = "<%s>  [color=yellow]%s[/color]: %s"
 		var data_on_template = template % [
 			rows["id"],
 			rows["title"],
@@ -58,12 +58,15 @@ func refresh_data_ui():
 func _clicked_entry_signal(selection):
 	print("oli doble click, mi data es :" + selection)
 	var show_selected = DB_global.database.select_rows("memories", "id =" + selection, ["*"])
+
+	# Please do a function using the for loop. I dont want to repeat it 4 more times each time i call
+	# my database
 	delete_old_labels()
 
 	for rows in show_selected:
 		var new_label = ENTRIESCONTAINER.instantiate()
 		new_label.entry_id = rows["id"]
-		var template = "%s | %s | %s | %s | %s | %s | %s"
+		var template = "<%s>  [color=yellow]%s[/color]: %s | %s | %s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
 			rows["title"],
@@ -106,7 +109,7 @@ func _on_read_data_pressed() -> void:
 	for rows in read_data:
 		var new_label = ENTRIESCONTAINER.instantiate()
 		new_label.entry_id = rows["id"]
-		var template = "%s | %s | %s | %s | %s | %s | %s"
+		var template = "<%s>  [color=yellow]%s[/color]: %s | %s | %s | %s | %s"
 		var data_on_template = template % [
 			rows["id"],
 			rows["title"],
