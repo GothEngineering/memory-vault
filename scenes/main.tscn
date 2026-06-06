@@ -204,6 +204,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
 [node name="ToDoList" type="Label" parent="." unique_id=1560100599]
+visible = false
 layout_mode = 0
 offset_right = 602.0
 offset_bottom = 187.0
