@@ -169,6 +169,7 @@ offset_left = 410.0
 offset_top = 13.0
 offset_right = 577.0
 offset_bottom = 53.0
+text = "         "
 
 [node name="GameTitleInput" type="TextEdit" parent="Panel" unique_id=240650029]
 layout_mode = 0
