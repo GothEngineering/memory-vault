@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://cryybepc0m6tc"]
 
-[node name="UI_Placeholder" type="Control" unique_id=198477385]
+[ext_resource type="Script" uid="uid://djva43xxo8uiy" path="res://scenes/user_interface.gd" id="1_syvep"]
+
+[node name="User_Interface" type="Control" unique_id=198477385]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_syvep")
 
 [node name="VboxContainer" type="VBoxContainer" parent="." unique_id=1852434907]
 layout_mode = 0
@@ -12,6 +15,7 @@ offset_left = 818.0
 offset_top = 347.0
 offset_right = 1072.0
 offset_bottom = 598.0
+theme_override_constants/separation = 10
 
 [node name="CreateData" type="Button" parent="VboxContainer" unique_id=968130530]
 layout_mode = 2
