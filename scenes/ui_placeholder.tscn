@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://cryybepc0m6tc"]
+
+[node name="UI_Placeholder" type="Control" unique_id=198477385]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VboxContainer" type="VBoxContainer" parent="." unique_id=1852434907]
+layout_mode = 0
+offset_left = 818.0
+offset_top = 347.0
+offset_right = 1072.0
+offset_bottom = 598.0
+
+[node name="CreateData" type="Button" parent="VboxContainer" unique_id=968130530]
+layout_mode = 2
+text = "Add Entry"
+
+[node name="ReadData" type="Button" parent="VboxContainer" unique_id=1559076434]
+layout_mode = 2
+text = "Read Entries
+"
+
+[node name="UpdateData" type="Button" parent="VboxContainer" unique_id=393032269]
+layout_mode = 2
+text = "Update Entry"
+
+[node name="DeleteData" type="Button" parent="VboxContainer" unique_id=630768220]
+layout_mode = 2
+text = "Delete Entry"
+
+[node name="CustomSelect" type="Button" parent="VboxContainer" unique_id=1171285429]
+layout_mode = 2
+text = "Custom select"
+
+[node name="ShowLess" type="Button" parent="." unique_id=1218413181]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 598.0
+offset_right = 737.0
+offset_bottom = 629.0
+text = "Previous Page"
+
+[node name="ShowMore" type="Button" parent="." unique_id=4642000]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 566.0
+offset_right = 737.0
+offset_bottom = 597.0
+text = "Next Page"
+
+[node name="SortBy" type="Button" parent="." unique_id=1796629575]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 329.0
+offset_right = 737.0
+offset_bottom = 360.0
+text = "Sort By"
+
+[node name="Panel" type="Control" parent="." unique_id=1658948914]
+anchors_preset = 0
+offset_left = 531.0
+offset_top = 147.0
+offset_right = 571.0
+offset_bottom = 187.0
+
+[node name="TitleLabel" type="Label" parent="Panel" unique_id=966160641]
+layout_mode = 0
+offset_left = -456.0
+offset_top = -103.0
+offset_right = -402.0
+offset_bottom = -67.0
+theme_override_font_sizes/font_size = 26
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescLabel" type="Label" parent="Panel" unique_id=1332783346]
+layout_mode = 0
+offset_left = -499.0
+offset_top = 15.0
+offset_right = -355.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 26
+text = "Description"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameTitle" type="Label" parent="Panel" unique_id=2064293101]
+layout_mode = 0
+offset_left = 176.0
+offset_top = -107.0
+offset_right = 311.0
+offset_bottom = -71.0
+theme_override_font_sizes/font_size = 26
+text = "Game Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Location" type="Label" parent="Panel" unique_id=808129622]
+layout_mode = 0
+offset_left = 191.0
+offset_top = -46.0
+offset_right = 299.0
+offset_bottom = -10.0
+theme_override_font_sizes/font_size = 26
+text = "Location"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Feeling" type="Label" parent="Panel" unique_id=485010988]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 19.0
+offset_right = 288.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 26
+text = "Feeling"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleInput" type="TextEdit" parent="Panel" unique_id=2064209662]
+layout_mode = 0
+offset_left = -340.0
+offset_top = -107.0
+offset_right = 45.0
+offset_bottom = -67.0
+
+[node name="DescInput" type="TextEdit" parent="Panel" unique_id=1625737887]
+layout_mode = 0
+offset_left = -340.0
+offset_top = -42.0
+offset_right = 45.0
+offset_bottom = 133.0
+wrap_mode = 1
+
+[node name="GameTitleInput" type="TextEdit" parent="Panel" unique_id=840247300]
+layout_mode = 0
+offset_left = 342.0
+offset_top = -107.0
+offset_right = 509.0
+offset_bottom = -67.0
+
+[node name="LocationInput" type="TextEdit" parent="Panel" unique_id=1141405239]
+layout_mode = 0
+offset_left = 342.0
+offset_top = -46.0
+offset_right = 509.0
+offset_bottom = -6.0
+
+[node name="FeelingInput" type="TextEdit" parent="Panel" unique_id=1524888555]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 15.0
+offset_right = 509.0
+offset_bottom = 55.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1303625962]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 347.0
+offset_right = 620.0
+offset_bottom = 612.0
+bbcode_enabled = true
+text = "<115> [color=yellow] Title test[/color]: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+<116> [color=yellow] Title test[/color]: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+shortcut_keys_enabled = false
+
+[node name="Panel2" type="Panel" parent="." unique_id=1277887329]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 611.0
+offset_bottom = 303.0
+mouse_filter = 2
+
+[node name="Panel4" type="Panel" parent="." unique_id=2126921958]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 329.0
+offset_right = 620.0
+offset_bottom = 629.0
+mouse_filter = 2
+
+[node name="Panel5" type="Panel" parent="." unique_id=1045855145]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 620.0
+offset_top = 329.0
+offset_right = 737.0
+offset_bottom = 629.0
+mouse_filter = 2
+
+[node name="Panel3" type="Panel" parent="." unique_id=887689541]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 670.0
+offset_top = 20.0
+offset_right = 1093.0
+offset_bottom = 303.0
+mouse_filter = 2
+
+[node name="Panel6" type="Panel" parent="." unique_id=1199987120]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 797.0
+offset_top = 329.0
+offset_right = 1093.0
+offset_bottom = 629.0
+mouse_filter = 2
