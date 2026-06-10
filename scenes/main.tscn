@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b7rfu3w8nck3t"]
 
 [ext_resource type="Script" uid="uid://cl0e3oo8q8n3n" path="res://scripts/SQLMemories.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cryybepc0m6tc" path="res://scenes/user_interface.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Control" unique_id=1648404262]
 layout_mode = 3
@@ -11,7 +12,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o5qli")
 
+[node name="User_Interface" parent="." unique_id=198477385 instance=ExtResource("2_0wfyh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="CreateData" type="Button" parent="." unique_id=736622536]
+visible = false
 layout_mode = 0
 offset_left = 981.0
 offset_top = 452.0
@@ -20,6 +30,7 @@ offset_bottom = 483.0
 text = "Add Entry"
 
 [node name="ReadData" type="Button" parent="." unique_id=1757523518]
+visible = false
 layout_mode = 0
 offset_left = 981.0
 offset_top = 487.0
@@ -29,6 +40,7 @@ text = "Read Entries
 "
 
 [node name="UpdateData" type="Button" parent="." unique_id=2103357679]
+visible = false
 layout_mode = 0
 offset_left = 981.0
 offset_top = 522.0
@@ -37,6 +49,7 @@ offset_bottom = 553.0
 text = "Update Entry"
 
 [node name="DeleteData" type="Button" parent="." unique_id=668910169]
+visible = false
 layout_mode = 0
 offset_left = 981.0
 offset_top = 557.0
@@ -45,6 +58,7 @@ offset_bottom = 588.0
 text = "Delete Entry"
 
 [node name="CustomSelect" type="Button" parent="." unique_id=320769196]
+visible = false
 layout_mode = 0
 offset_left = 981.0
 offset_top = 592.0
@@ -53,6 +67,7 @@ offset_bottom = 623.0
 text = "Custom select"
 
 [node name="ShowLess" type="Button" parent="." unique_id=1553447040]
+visible = false
 layout_mode = 0
 offset_left = 594.0
 offset_top = 592.0
@@ -61,6 +76,7 @@ offset_bottom = 623.0
 text = "Previous Page"
 
 [node name="ShowMore" type="Button" parent="." unique_id=965792375]
+visible = false
 layout_mode = 0
 offset_left = 594.0
 offset_top = 560.0
@@ -69,6 +85,7 @@ offset_bottom = 591.0
 text = "Next Page"
 
 [node name="SortBy" type="Button" parent="." unique_id=1705957274]
+visible = false
 layout_mode = 0
 offset_left = 594.0
 offset_top = 357.0
@@ -77,6 +94,7 @@ offset_bottom = 388.0
 text = "Sort By"
 
 [node name="Panel" type="Control" parent="." unique_id=1733254937]
+visible = false
 anchors_preset = 0
 offset_left = 531.0
 offset_top = 147.0
@@ -193,6 +211,7 @@ offset_right = 577.0
 offset_bottom = 219.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=447322030]
+visible = false
 layout_mode = 0
 offset_top = 357.0
 offset_right = 594.0

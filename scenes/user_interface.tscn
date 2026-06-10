@@ -4,9 +4,11 @@
 
 [node name="User_Interface" type="Control" unique_id=198477385]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_syvep")
 
 [node name="VboxContainer" type="VBoxContainer" parent="." unique_id=1852434907]
@@ -161,6 +163,7 @@ offset_right = 509.0
 offset_bottom = 55.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1303625962]
+visible = false
 layout_mode = 0
 offset_left = 26.0
 offset_top = 347.0
@@ -171,6 +174,19 @@ text = "<115> [color=yellow] Title test[/color]: Lorem ipsum dolor sit amet, con
 
 <116> [color=yellow] Title test[/color]: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 shortcut_keys_enabled = false
+
+[node name="EntriesContainer" type="ScrollContainer" parent="." unique_id=1500623384]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 347.0
+offset_right = 614.0
+offset_bottom = 613.0
+horizontal_scroll_mode = 0
+
+[node name="EntrySorter" type="VBoxContainer" parent="EntriesContainer" unique_id=1841186830]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
 
 [node name="Panel2" type="Panel" parent="." unique_id=1277887329]
 show_behind_parent = true
@@ -216,3 +232,12 @@ offset_top = 329.0
 offset_right = 1093.0
 offset_bottom = 629.0
 mouse_filter = 2
+
+[connection signal="pressed" from="VboxContainer/CreateData" to="." method="_on_create_data_pressed"]
+[connection signal="pressed" from="VboxContainer/ReadData" to="." method="_on_read_data_pressed"]
+[connection signal="pressed" from="VboxContainer/UpdateData" to="." method="_on_update_data_pressed"]
+[connection signal="pressed" from="VboxContainer/DeleteData" to="." method="_on_delete_data_pressed"]
+[connection signal="pressed" from="VboxContainer/CustomSelect" to="." method="_on_custom_select_pressed"]
+[connection signal="pressed" from="ShowLess" to="." method="_on_show_less_pressed"]
+[connection signal="pressed" from="ShowMore" to="." method="_on_show_more_pressed"]
+[connection signal="pressed" from="SortBy" to="." method="_on_sort_by_pressed"]

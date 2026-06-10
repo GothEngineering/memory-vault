@@ -102,7 +102,6 @@ func _on_create_data_pressed() -> void:
 	refresh_data_ui()
 
 func _on_read_data_pressed() -> void:
-
 	var input_received = id_input.text
 	var read_data = DB_global.database.select_rows("memories", "id = " + str(id_input.text), ["*"])
 
