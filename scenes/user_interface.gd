@@ -125,7 +125,7 @@ func _on_delete_data_pressed() -> void:
 	refresh_data_ui()
 
 func _on_custom_select_pressed() -> void:
-	pass
+	pass 
 
 func delete_old_entries():
 	for old_row in entry_sorter.get_children():
@@ -133,12 +133,19 @@ func delete_old_entries():
 
 
 func _on_show_less_pressed() -> void:
-	pass # Replace with function body.
-
+	current_offset -= 20
+	if current_offset < 0:
+		current_offset = 0
+	refresh_data_ui()
 
 func _on_show_more_pressed() -> void:
-	pass # Replace with function body.
-
+	current_offset += 20
+	refresh_data_ui()
 
 func _on_sort_by_pressed() -> void:
-	pass # Replace with function body.
+	sort_by_oldest = !sort_by_oldest
+	if sort_by_oldest == true:
+		sorting_by = "ASC"
+	else:
+		sorting_by = "DESC"
+	refresh_data_ui()
