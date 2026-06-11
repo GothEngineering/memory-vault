@@ -43,6 +43,13 @@ func refresh_data_ui():
 		entry_sorter.add_child(new_label)
 		new_label.set_rows_text(data_template)
 
+		# Find a faster way to do this part
+		title_input.clear()
+		desc_input.clear()
+		game_title_input.clear()
+		location_input.clear()
+		feeling_input.clear()
+
 func _clicked_entry_signal(selection):
 	print("oli toi probando " + selection)
 	var show_selected = DB_global.database.select_rows("memories", "id =" + selection, ["*"])
