@@ -64,6 +64,14 @@ offset_right = 737.0
 offset_bottom = 360.0
 text = "Sort By"
 
+[node name="RefreshButton" type="Button" parent="." unique_id=1401506728]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 360.0
+offset_right = 737.0
+offset_bottom = 391.0
+text = "Refresh"
+
 [node name="Panel" type="Control" parent="." unique_id=1658948914]
 anchors_preset = 0
 offset_left = 531.0
@@ -241,3 +249,4 @@ mouse_filter = 2
 [connection signal="pressed" from="ShowLess" to="." method="_on_show_less_pressed"]
 [connection signal="pressed" from="ShowMore" to="." method="_on_show_more_pressed"]
 [connection signal="pressed" from="SortBy" to="." method="_on_sort_by_pressed"]
+[connection signal="pressed" from="RefreshButton" to="." method="_on_refresh_button_pressed"]

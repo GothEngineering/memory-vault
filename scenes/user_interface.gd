@@ -80,8 +80,9 @@ func _on_create_data_pressed() -> void:
 
 
 func _on_read_data_pressed() -> void:
+	# Fix the error where it's not showing the specific id i give it
 	var input_received = title_input.text
-	var read_data = DB_global.database.select_rows("memories", "title =" + str(input_received), ["*"])
+	var read_data = DB_global.database.select_rows("memories", "title = '" + str(input_received) + "'", ["*"])
 
 	if input_received == "":
 		refresh_data_ui()
@@ -115,8 +116,8 @@ func _on_update_data_pressed() -> void:
 		"feeling" : feeling_input.text,
 		}
 
-	var title_inputted = "title =" + str(title_input.text)
-	DB_global.database.update_rows("memories", "title =" + title_inputted, data_to_update)
+	var title_inputted = str(title_input.text)
+	DB_global.database.update_rows("memories", "title = '" + title_inputted + "'", data_to_update)
 	refresh_data_ui()
 
 
@@ -148,4 +149,8 @@ func _on_sort_by_pressed() -> void:
 		sorting_by = "ASC"
 	else:
 		sorting_by = "DESC"
+	refresh_data_ui()
+
+
+func _on_refresh_button_pressed() -> void:
 	refresh_data_ui()
