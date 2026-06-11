@@ -121,8 +121,8 @@ func _on_update_data_pressed() -> void:
 
 
 func _on_delete_data_pressed() -> void:
-	pass
-
+	DB_global.database.delete_rows("memories", "title = '" + title_input.text + "'")
+	refresh_data_ui()
 
 func _on_custom_select_pressed() -> void:
 	pass
