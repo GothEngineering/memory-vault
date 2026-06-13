@@ -6,12 +6,16 @@ var db_path = "user://memories_data.db"
 func _ready() -> void:
 	database = SQLite.new()
 	database.path = db_path
+
+# I think this part is obvious but this sees if the .db file exists on the user folder and if not
+# it creates one
 	if not FileAccess.file_exists(db_path):
 		database.open_db()
 		create_the_tables()
 	else:
 		database.open_db()
 
+# This function creates all the rows upon launching the app without an existing file
 func create_the_tables():
 	var tables = {
 		"id" : {"data_type":"int", "primary_key": true, "not_null": true, "auto_increment": true},
