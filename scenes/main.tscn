@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://b7rfu3w8nck3t"]
 
-[ext_resource type="Script" uid="uid://cl0e3oo8q8n3n" path="res://scripts/SQLMemories.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://cryybepc0m6tc" path="res://scenes/user_interface.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Control" unique_id=1648404262]
@@ -10,7 +9,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_o5qli")
 
 [node name="User_Interface" parent="." unique_id=198477385 instance=ExtResource("2_0wfyh")]
 layout_mode = 0
