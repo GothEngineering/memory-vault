@@ -20,7 +20,7 @@ func create_the_tables():
 		"game_title" : {"data_type":"text"},
 		"location" : {"data_type":"text"},
 		"feeling" : {"data_type":"text"},
-		"data_saved" : {"data_type":"text"},
+		"data_saved" : {"data_type":"text"}
 	}
 	database.create_table("memories", tables)
 
