@@ -130,7 +130,7 @@ func _on_read_data_pressed() -> void:
 			new_label.set_rows_text(data_on_template)
 
 			desc_input.text = rows["description"]
-			game_title_input.text = rows["location"]
+			game_title_input.text = rows["game_title"]
 			location_input.text = rows["location"]
 			feeling_input.text = rows["feeling"]
 
