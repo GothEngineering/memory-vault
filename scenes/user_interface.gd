@@ -129,6 +129,11 @@ func _on_read_data_pressed() -> void:
 			entry_sorter.add_child(new_label)
 			new_label.set_rows_text(data_on_template)
 
+			desc_input.text = rows["description"]
+			game_title_input.text = rows["location"]
+			location_input.text = rows["location"]
+			feeling_input.text = rows["feeling"]
+
 # Entry update (it needs the title to update the entry)
 func _on_update_data_pressed() -> void:
 	var data_to_update = {
@@ -142,6 +147,7 @@ func _on_update_data_pressed() -> void:
 	var title_inputted = str(title_input.text)
 	DB_global.database.update_rows("memories", "title = '" + title_inputted + "'", data_to_update)
 	refresh_data_ui()
+	# It seems that i can't update the title when using this function, well i'll fix it later
 
 # Entry deletion
 func _on_delete_data_pressed() -> void:
@@ -153,6 +159,13 @@ func _on_delete_data_pressed() -> void:
 func delete_old_entries():
 	for old_row in entry_sorter.get_children():
 		old_row.queue_free()
+
+#func remove_extra_spaces():
+	#var text_inputs = [title_input.text, game_title_input.text, location_input.text, feeling_input.text]
+
+	#for n in text_inputs:
+		#var splitting = text_inputs.split("\n")
+		# Future space clean up function goes here, i didn't know how to make it
 
 
 func _on_show_less_pressed() -> void:
