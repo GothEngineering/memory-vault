@@ -82,7 +82,7 @@ func _clicked_entry_signal(selection):
 		
 		title_input.text = rows["title"]
 		desc_input.text = rows["description"]
-		game_title_input.text = rows["location"]
+		game_title_input.text = rows["game_title"]
 		location_input.text = rows["location"]
 		feeling_input.text = rows["feeling"]
 
